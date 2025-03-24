@@ -1,0 +1,151 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  header {
+    text-align: center;
+    padding: 20px 0 0;
+    background-color: white;
+  }
+  
+  .logo {
+    width: 300px;
+    height: auto;
+    margin-bottom: 10px;
+    /* pevná veľkosť bez ohľadu na zoom */
+    max-width: none;
+    transform: scale(1);
+  }
+  
+  nav {
+    background-color: #d69fd6;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .menu li {
+    margin: 0;
+  }
+  
+  .menu a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .menu a:hover {
+    background-color: #ba7cba;
+    color: #fff;
+    text-shadow: 0 0 5px #fff;
+    transform: scale(1.05);
+  }
+  
+  .menu .active {
+    background-color: #a54ca5;
+  }
+  
+  .hero {
+    background: url('assets/background.jpg') no-repeat center center/cover;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-attachment: fixed;
+  }
+  
+  .overlay {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 600px;
+  }
+  
+  .overlay h1 {
+    font-size: 2.5em;
+    color: #944a94;
+    margin-bottom: 15px;
+  }
+  
+  .overlay p {
+    font-size: 1.2em;
+    color: #6d2c6d;
+  }
+  
+  footer {
+    background-color: #d69fd6;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9em;
+    color: #fff;
+  }
+  
+  footer a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  
+  /* -------------------
+     📱 MOBILNÁ RESPONZIVITA
+  ------------------- */
+  @media (max-width: 768px) {
+    .overlay {
+      padding: 20px;
+    }
+  
+    .overlay h1 {
+      font-size: 1.8em;
+    }
+  
+    .overlay p {
+      font-size: 1em;
+    }
+  
+    .menu {
+      flex-direction: column;
+    }
+  
+    .menu a {
+      padding: 12px;
+    }
+  
+    .logo {
+      width: 260px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .overlay h1 {
+      font-size: 1.5em;
+    }
+  
+    .overlay p {
+      font-size: 0.95em;
+    }
+  
+    .logo {
+      width: 220px;
+    }
+  }
