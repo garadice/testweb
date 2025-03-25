@@ -99,20 +99,21 @@
       }
     });
   </script>
-<!-- Overlay pri odosielaní -->
+<!-- Odosielanie - Spinner -->
 <div id="sendingOverlay" class="overlay hidden">
-    <div class="overlay-box">
+    <div class="overlay-box colored">
       <div class="spinner"></div>
       <p>Budete presmerovaný na stránku, kde overíme, že nie ste robot 🙂❤️</p>
     </div>
   </div>
   
-  <!-- Modálne ďakovné okno -->
+  <!-- Ďakovné okno -->
   <div id="thankYouOverlay" class="overlay hidden">
-    <div class="overlay-box">
+    <div class="overlay-box colored">
       <p>Ďakujem za odoslanie správy, čoskoro sa Vám ozvem</p>
     </div>
   </div>
+  
   <script>
     // Zobrazenie spinneru pri odosielaní
     const form = document.querySelector('.contact-form');
