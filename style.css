@@ -421,4 +421,50 @@
       height: 350px;
     }
   }
-   
+/* 🔄 Overlay všeobecne */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(212, 162, 212, 0.85); /* svetlofialový s odtieňom */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .overlay.hidden {
+    display: none;
+  }
+  
+  .overlay-box {
+    background-color: white;
+    color: #944a94;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    max-width: 400px;
+    font-size: 1.1em;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  /* 🔄 Spinner (kolečko) */
+  .spinner {
+    border: 5px solid #f3e5f5;
+    border-top: 5px solid #944a94;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 15px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+     
