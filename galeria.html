@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <style>
+        body {
+          opacity: 0;
+          transition: opacity 0.5s ease;
+        }
+      
+        body.fade-in {
+          opacity: 1;
+        }
+      </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galéria - Dermalove</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Lightbox CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <img src="assets/logo.jpg" alt="Dermalove Kozmetický Salón" class="logo" />
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Domov</a></li>
+        <li><a href="o-salone.html">O salóne</a></li>
+        <li><a href="sluzby.html">Kozmetické služby</a></li>
+        <li><a href="galeria.html" class="active">Galéria</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery-wrapper">
+      <h1>Galéria</h1>
+      <div class="gallery-grid">
+        <a href="assets/img2.jpg" data-lightbox="dermalove"><img src="assets/img2.jpg" alt="Galéria 2" /></a>
+        <a href="assets/img3.jpg" data-lightbox="dermalove"><img src="assets/img3.jpg" alt="Galéria 3" /></a>
+        <a href="assets/img4.jpg" data-lightbox="dermalove"><img src="assets/img4.jpg" alt="Galéria 4" /></a>
+        <a href="assets/img5.jpg" data-lightbox="dermalove"><img src="assets/img5.jpg" alt="Galéria 5" /></a>
+        <a href="assets/img6.jpg" data-lightbox="dermalove"><img src="assets/img6.jpg" alt="Galéria 5" /></a>
+        <a href="assets/img7.jpg" data-lightbox="dermalove"><img src="assets/img7.jpg" alt="Galéria 5" /></a>
+        <a href="assets/img8.jpg" data-lightbox="dermalove"><img src="assets/img8.jpg" alt="Galéria 5" /></a>
+        <a href="assets/img9.jpg" data-lightbox="dermalove"><img src="assets/img9.jpg" alt="Galéria 5" /></a>
+        <a href="assets/img10.jpg" data-lightbox="dermalove"><img src="assets/img10.jpg" alt="Galéria 5" /></a>
+        <a href="assets/img11.jpg" data-lightbox="dermalove"><img src="assets/img11.jpg" alt="Galéria 5" /></a>
+        <a href="assets/img12.jpg" data-lightbox="dermalove"><img src="assets/img12.jpg" alt="Galéria 5" /></a>
+        <a href="assets/img13.jpg" data-lightbox="dermalove"><img src="assets/img13.jpg" alt="Galéria 5" /></a>
+        <!-- Pokračuj podľa potreby až po 15 -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Dermalove. Website by <a href="https://bacimo.net" target="_blank">bacimo</a>.</p>
+  </footer>
+
+  <!-- Lightbox JS -->
+  <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
+  <script>
+    // Fade in pri načítaní
+    document.addEventListener("DOMContentLoaded", function () {
+      document.body.classList.add("fade-in");
+    });
+  
+    // Fade out pri kliknutí na odkaz
+    document.querySelectorAll("a").forEach(link => {
+      const href = link.getAttribute("href");
+      // Iba interné odkazy
+      if (href && href.endsWith(".html")) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.body.classList.remove("fade-in");
+          document.body.style.opacity = 0;
+  
+          setTimeout(() => {
+            window.location = href;
+          }, 300); // Zhodné s CSS transition časom
+        });
+      }
+    });
+  </script>
+  
+</body>
+</html>
