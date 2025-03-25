@@ -44,7 +44,7 @@
             <input type="email" name="Email" placeholder="Email *" required>
             <input type="text" name="Predmet" placeholder="Predmet">
             <textarea name="Správa" rows="5" placeholder="Správa"></textarea>
-            <input type="hidden" name="_next" value="https://dermalove-web.vercel.app/kontakt.html">
+            <input type="hidden" name="_next" value="https://dermalove-web.vercel.app/kontakt.html?success=true">
             <button type="submit">Odoslať</button>
           </form>
   
@@ -99,7 +99,42 @@
       }
     });
   </script>
+<!-- Overlay pri odosielaní -->
+<div id="sendingOverlay" class="overlay hidden">
+    <div class="overlay-box">
+      <div class="spinner"></div>
+      <p>Budete presmerovaný na stránku, kde overíme, že nie ste robot 🙂❤️</p>
+    </div>
+  </div>
   
+  <!-- Modálne ďakovné okno -->
+  <div id="thankYouOverlay" class="overlay hidden">
+    <div class="overlay-box">
+      <p>Ďakujem za odoslanie správy, čoskoro sa Vám ozvem</p>
+    </div>
+  </div>
+  <script>
+    // Zobrazenie spinneru pri odosielaní
+    const form = document.querySelector('.contact-form');
+    const sendingOverlay = document.getElementById('sendingOverlay');
+  
+    form.addEventListener('submit', function () {
+      sendingOverlay.classList.remove('hidden');
+    });
+  
+    // Po návrate z FormSubmit (ak je URL ?success=true)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("success") === "true") {
+      const thankYouOverlay = document.getElementById('thankYouOverlay');
+      thankYouOverlay.classList.remove('hidden');
+  
+      // Kliknutím na overlay ho skryješ
+      thankYouOverlay.addEventListener('click', () => {
+        thankYouOverlay.classList.add('hidden');
+      });
+    }
+  </script>
+      
 </body>
 </html>
   
