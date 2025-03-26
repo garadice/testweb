@@ -70,16 +70,54 @@
   }
   
   /* Hlavný banner (hero sekcia) */
-  .hero {
-    background: url('assets/background.jpg') no-repeat center center/cover;
-    min-height: 60vh;
+  /*.hero {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: calc(100vh - 150px); 
+    padding: 0 20px;
+    text-align: center;
+  }*/
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(80vh - 160px); /* uprav podľa výšky header + footer */
+   /* padding: 0 20px;*/
+    padding: 100px 20px 80px;
+    text-align: center;
+  
+    background-image: url('./assets/background.jpg'); /* cesta k tvojmu obrázku */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
-    background-attachment: fixed;
-    padding: 40px 20px;
   }
+  
+  .hero-text {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+    max-width: 700px;
+  }
+  
+  .hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #6a1b9a;
+    font-weight: 700;
+  }
+  
+  .hero-text h1 span {
+    color: #b455b6; /* jemnejšia fialová na zvýraznenie názvu */
+  }
+  
+  .hero-text p {
+    font-size: 1.3rem;
+    color: #5e2e74;
+  }
+  
   
   /* Text cez obrázok */
   .overlay {
@@ -427,7 +465,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 800vw;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -435,10 +473,15 @@
     z-index: 1000;
     backdrop-filter: blur(2px);
     background-color: rgba(255, 255, 255, 0.3); /* jemné rozostrenie bez pásu */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
   }
   
   .overlay.hidden {
-    display: none;
+    display: none !important;
+    visibility: hidden;
+    pointer-events: none;
   }
   
   /* Box so správou (biely aj ružový) */

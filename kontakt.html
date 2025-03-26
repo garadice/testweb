@@ -76,29 +76,7 @@
   <footer>
     <p>© 2025 Dermalove. Website by <a href="https://bacimo.net" target="_blank">bacimo</a>.</p>
   </footer>
-  <script>
-    // Fade in pri načítaní
-    document.addEventListener("DOMContentLoaded", function () {
-      document.body.classList.add("fade-in");
-    });
-  
-    // Fade out pri kliknutí na odkaz
-    document.querySelectorAll("a").forEach(link => {
-      const href = link.getAttribute("href");
-      // Iba interné odkazy
-      if (href && href.endsWith(".html")) {
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          document.body.classList.remove("fade-in");
-          document.body.style.opacity = 0;
-  
-          setTimeout(() => {
-            window.location = href;
-          }, 300); // Zhodné s CSS transition časom
-        });
-      }
-    });
-  </script>
+
 <!-- Odosielanie - Spinner -->
 <div id="sendingOverlay" class="overlay hidden">
     <div class="overlay-box colored">
@@ -115,27 +93,63 @@
   </div>
   
   <script>
-    // Zobrazenie spinneru pri odosielaní
-    const form = document.querySelector('.contact-form');
-    const sendingOverlay = document.getElementById('sendingOverlay');
-  
-    form.addEventListener('submit', function () {
-      sendingOverlay.classList.remove('hidden');
-    });
-  
-    // Po návrate z FormSubmit (ak je URL ?success=true)
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("success") === "true") {
-      const thankYouOverlay = document.getElementById('thankYouOverlay');
-      thankYouOverlay.classList.remove('hidden');
-  
-      // Kliknutím na overlay ho skryješ
-      thankYouOverlay.addEventListener('click', () => {
-        thankYouOverlay.classList.add('hidden');
+    document.addEventListener("DOMContentLoaded", function () {
+      document.body.classList.add("fade-in");
+    
+      // Iba pre interné odkazy
+      document.querySelectorAll("a").forEach(link => {
+        const href = link.getAttribute("href");
+        if (href && href.endsWith(".html")) {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            document.body.classList.remove("fade-in");
+            document.body.style.opacity = 0;
+    
+            setTimeout(() => {
+              window.location = href;
+            }, 300);
+          });
+        }
       });
-    }
-  </script>
-      
+    
+      // Skontroluj úspešné odoslanie formulára
+      const urlParams = new URLSearchParams(window.location.search);
+      const thankYouOverlay = document.getElementById('thankYouOverlay');
+      const sendingOverlay = document.getElementById('sendingOverlay');
+    
+      if (urlParams.get("success") === "true") {
+        thankYouOverlay.classList.remove('hidden');
+    
+        // Kliknutím kedykoľvek zavrieš overlay
+        thankYouOverlay.addEventListener('click', () => {
+          thankYouOverlay.classList.add('hidden');
+        });
+      }
+    
+      // Spinner pri odosielaní formulára
+      const form = document.querySelector('.contact-form');
+      form.addEventListener('submit', function () {
+        sendingOverlay.classList.remove('hidden');
+      });
+    });
+    </script>  
+<script>
+    // Ak URL obsahuje ?success=true, zobraz ďakovné okno
+    
+    
+if (urlParams.get("success") === "true") {
+  const thankYouOverlay = document.getElementById('thankYouOverlay');
+  thankYouOverlay.classList.remove('hidden');
+
+  thankYouOverlay.addEventListener('click', () => {
+    thankYouOverlay.classList.add('hidden');
+  });
+} else {
+  // ⬇️ bezpečnostná poistka – skry overlay ak by sa náhodou nezavrel
+  document.getElementById('thankYouOverlay')?.classList.add('hidden');
+  document.getElementById('sendingOverlay')?.classList.add('hidden');
+}
+  </script>      
 </body>
 </html>
   
