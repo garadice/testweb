@@ -465,7 +465,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 800vw;
+    width: 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -517,4 +517,16 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-  
+
+  /* Lietajúci motýľ */
+  #flying-butterfly {
+    position: fixed;
+    width: 200px; /* Veľkosť motýľa (4x zväčšená) */
+    height: auto;
+    z-index: 999; /* Aby bol nad väčšinou obsahu */
+    pointer-events: auto; /* Povolenie klikania */
+    cursor: pointer; /* Ukazovateľ myši */
+    will-change: transform, left, top, opacity; /* Optimalizácia animácie + opacity */
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3)); /* Jemný tieň */
+    transition: opacity 0.1s ease-out; /* Krátky fade efekt pri zmiznutí/objavení */
+  }

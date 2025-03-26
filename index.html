@@ -70,6 +70,131 @@
       }
     });
   </script>
-  
+
+  <!-- Lietajúci motýľ -->
+  <img src="assets/butterfly.png" alt="Lietajúci motýľ" id="flying-butterfly">
+
+  <script>
+    const butterfly = document.getElementById('flying-butterfly');
+    let posX = Math.random() * (window.innerWidth - 50);
+    // Removed duplicate posX declaration
+    let posY = Math.random() * (window.innerHeight - 50);
+    let startX = posX;
+    let startY = posY;
+    let targetX = Math.random() * (window.innerWidth - 50);
+    let targetY = Math.random() * (window.innerHeight - 50);
+    let startTime = Date.now();
+    let duration = 5000 + Math.random() * 3000; // Duration between 5-8 seconds
+    let isFlipped = false; // Sledovanie, či je motýľ otočený
+
+    // Cubic ease-in-out function: accelerates, then decelerates
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function animateButterfly() {
+      const now = Date.now();
+      const elapsed = now - startTime;
+      const t = Math.min(1, elapsed / duration); // Progress from 0 to 1
+      const easedT = easeInOutCubic(t); // Apply easing
+
+      // Calculate current position based on eased progress
+      const currentPosX = startX + (targetX - startX) * easedT;
+      const currentPosY = startY + (targetY - startY) * easedT;
+
+      // Determine direction for flipping (based on target, not instantaneous dx)
+      const overallDX = targetX - startX;
+      if (overallDX < 0) {
+          isFlipped = true; // Moving left
+      } else if (overallDX > 0) {
+          isFlipped = false; // Moving right
+      }
+      // If overallDX is 0, keep the last flip state
+
+      const horizontalFlip = isFlipped ? 'scaleX(-1)' : 'scaleX(1)';
+
+      // Wing flapping
+      const scaleFactor = 1 + Math.sin(now * 0.01) * 0.1;
+
+      butterfly.style.left = `${currentPosX}px`;
+      butterfly.style.top = `${currentPosY}px`;
+      butterfly.style.transform = `${horizontalFlip} scale(${scaleFactor})`;
+
+      // If movement is complete (t >= 1), set a new target
+      if (t >= 1) {
+        startX = currentPosX; // Start from the current exact position
+        startY = currentPosY;
+        targetX = Math.random() * (window.innerWidth - 50);
+        targetY = Math.random() * (window.innerHeight - 50);
+        startTime = now; // Reset start time
+        duration = 5000 + Math.random() * 3000; // New random duration (5-8s)
+      }
+
+      // Update internal position state for next frame if needed (though calculation is absolute)
+      posX = currentPosX;
+      posY = currentPosY;
+
+      requestAnimationFrame(animateButterfly);
+    }
+
+    // Spustenie animácie po načítaní obrázka
+    butterfly.onload = () => {
+        butterfly.style.left = `${posX}px`;
+        butterfly.style.top = `${posY}px`;
+        animateButterfly();
+    };
+    // Fallback pre prípad, že onload sa nespustí (napr. z cache)
+    if (butterfly.complete) {
+        butterfly.onload();
+    }
+
+    // Funkcia na premiestnenie motýľa
+    function relocateButterfly() {
+        butterfly.style.opacity = '0'; // Zmiznutie
+
+        setTimeout(() => {
+            // Nová náhodná pozícia a cieľ
+            posX = Math.random() * (window.innerWidth - butterfly.width);
+            posY = Math.random() * (window.innerHeight - butterfly.height);
+            startX = posX;
+            startY = posY;
+            targetX = Math.random() * (window.innerWidth - butterfly.width);
+            targetY = Math.random() * (window.innerHeight - butterfly.height);
+            startTime = Date.now(); // Reset času animácie
+            duration = 5000 + Math.random() * 3000; // Nová dĺžka letu
+
+            // Okamžité nastavenie novej pozície (kým je neviditeľný)
+            butterfly.style.left = `${posX}px`;
+            butterfly.style.top = `${posY}px`;
+
+            // Znovu zobrazenie na novej pozícii
+            butterfly.style.opacity = '1';
+        }, 100); // Krátke oneskorenie zodpovedajúce CSS transition
+    }
+
+    // Pridanie event listenerov pre kliknutie a dotyk
+    butterfly.addEventListener('click', relocateButterfly);
+    butterfly.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Zabránenie prípadnému duplicitnému kliknutiu
+        relocateButterfly();
+    });
+
+
+    // Aktualizácia cieľa pri zmene veľkosti okna
+    window.addEventListener('resize', () => {
+        // Upraviť cieľ, aby zohľadnil novú veľkosť okna
+        targetX = Math.max(0, Math.min(targetX, window.innerWidth - butterfly.width));
+        targetY = Math.max(0, Math.min(targetY, window.innerHeight - butterfly.height));
+        // Tiež upraviť aktuálnu pozíciu, ak je mimo hraníc
+        posX = Math.max(0, Math.min(posX, window.innerWidth - butterfly.width));
+        posY = Math.max(0, Math.min(posY, window.innerHeight - butterfly.height));
+        butterfly.style.left = `${posX}px`;
+        butterfly.style.top = `${posY}px`;
+        startX = posX; // Reset start pre prípadnú prebiehajúcu animáciu
+        startY = posY;
+    });
+
+  </script>
+
 </body>
 </html>
